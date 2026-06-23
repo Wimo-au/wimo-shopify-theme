@@ -1,0 +1,45 @@
+<section class="tasting" data-snap data-label="Tasting">
+  <div class="tasting__inner" data-reveal>
+    <div class="eyebrow tasting__eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2 class="tasting__title">{{ section.settings.title }}</h2>
+    <div class="tasting__grid">
+      {% for block in section.blocks %}
+        <div class="tcard {% cycle '', 'tcard--mid', '' %}" {{ block.shopify_attributes }}>
+          <div class="tcard__num">{{ block.settings.number }}</div>
+          <h3 class="tcard__h">{{ block.settings.heading }}</h3>
+          <p class="tcard__p">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Tasting trio",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it tastes" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Bright, vivid and clean from first sip to last" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Tasting note",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Bright yuzu" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Real yuzu leads — zesty, floral, unmistakably alive on the first sip." }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "default": {
+    "blocks": [
+      { "type": "step", "settings": { "number": "01", "heading": "Bright yuzu", "text": "Real yuzu leads — zesty, floral, unmistakably alive on the first sip." } },
+      { "type": "step", "settings": { "number": "02", "heading": "Fine bubbles", "text": "A weightless, persistent sparkle that keeps every pour playful and fresh." } },
+      { "type": "step", "settings": { "number": "03", "heading": "Clean finish", "text": "Dry, coastal and crisp — the kind of finish that asks for one more glass." } }
+    ]
+  },
+  "presets": [{ "name": "Tasting trio" }]
+}
+{% endschema %}

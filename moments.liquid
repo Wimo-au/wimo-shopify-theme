@@ -1,0 +1,16 @@
+{%- assign m_img = section.settings.image -%}
+<section class="moments" data-snap data-label="Moments">
+  <img src="{% if m_img %}{{ m_img | image_url: width: 2000 }}{% else %}{{ 'trio-wide.png' | asset_url }}{% endif %}" alt="{{ section.settings.alt | escape }}" loading="lazy">
+  <div class="moments__fade"></div>
+</section>
+
+{% schema %}
+{
+  "name": "Lifestyle image",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "alt", "label": "Alt text", "default": "Purple Flame Yuzu Spritz on the coast" }
+  ],
+  "presets": [{ "name": "Lifestyle image" }]
+}
+{% endschema %}

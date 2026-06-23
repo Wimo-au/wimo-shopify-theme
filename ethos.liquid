@@ -1,0 +1,27 @@
+<section class="ethos" data-snap data-label="Mission">
+  <div class="ethos__inner" data-reveal>
+    <div class="ethos__rule-v"></div>
+    <div class="eyebrow ethos__eyebrow">{{ section.settings.eyebrow }}</div>
+    <p class="ethos__quote">{{ section.settings.quote_before }} <strong>{{ section.settings.quote_highlight }}</strong>{{ section.settings.quote_after }}</p>
+    <div class="ethos__rule-h"></div>
+    <div class="ethos__sign">
+      <strong>WIMO</strong>
+      <span class="ethos__dot"></span>
+      <span>{{ section.settings.signature }}</span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Mission statement",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our mission" },
+    { "type": "textarea", "id": "quote_before", "label": "Quote — before highlight", "default": "We explore a world where wine is fun, vivid and full of life — making it a" },
+    { "type": "text", "id": "quote_highlight", "label": "Quote — highlighted words", "default": "universal joy" },
+    { "type": "text", "id": "quote_after", "label": "Quote — after highlight", "default": ", for every moment worth pouring." },
+    { "type": "text", "id": "signature", "label": "Signature", "default": "your wine moment" }
+  ],
+  "presets": [{ "name": "Mission statement" }]
+}
+{% endschema %}

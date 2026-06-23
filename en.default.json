@@ -1,0 +1,44 @@
+{
+  "general": {
+    "meta": { "tags": "Tagged \"{{ tags }}\"", "page": "Page {{ page }}" },
+    "404": { "title": "Page not found", "subtext": "The page you were looking for does not exist." },
+    "pagination": { "previous": "Previous", "next": "Next" },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search",
+      "submit": "Search",
+      "results_with_count": "{{ count }} results for \"{{ terms }}\"",
+      "no_results": "No results for \"{{ terms }}\"."
+    },
+    "newsletter_form": { "email_placeholder": "Email address", "confirmation": "Thanks for joining the moment." }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "from_text_html": "From {{ price }}",
+      "quantity": "Quantity"
+    },
+    "facets": { "sort_by_label": "Sort by" }
+  },
+  "cart": {
+    "general": {
+      "title": "Your cart",
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "continue": "Continue shopping",
+      "remove": "Remove",
+      "update": "Update",
+      "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout."
+    }
+  },
+  "blogs": {
+    "article": { "read_more": "Read more", "by_author": "by {{ author }}" }
+  },
+  "shopify": {
+    "links": { "view_cart": "View cart" }
+  }
+}

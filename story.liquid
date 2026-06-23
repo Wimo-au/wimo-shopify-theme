@@ -1,0 +1,34 @@
+{%- assign story_img = section.settings.image -%}
+{%- assign note_img = section.settings.note_image -%}
+<section class="story" data-snap data-label="Real yuzu">
+  <div class="story__img" data-reveal style="background-image:url('{% if story_img %}{{ story_img | image_url: width: 1800 }}{% else %}{{ 'farm-crate.png' | asset_url }}{% endif %}');">
+    <div class="story__img-fade"></div>
+  </div>
+  <div class="story__text" data-reveal>
+    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2 class="h2">{{ section.settings.title_line1 }}<br><strong>{{ section.settings.title_line2 }}</strong></h2>
+    <p class="lede">{{ section.settings.paragraph_1 }}</p>
+    <p class="lede">{{ section.settings.paragraph_2 }}</p>
+    <div class="story__note">
+      <div class="story__note-img" style="background-image:url('{% if note_img %}{{ note_img | image_url: width: 300 }}{% else %}{{ 'yuzu-fruit.png' | asset_url }}{% endif %}');"></div>
+      <div class="story__note-text">{{ section.settings.note_text }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Origin story",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Main image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real fruit · Real yuzu" },
+    { "type": "text", "id": "title_line1", "label": "Title line 1", "default": "Made with" },
+    { "type": "text", "id": "title_line2", "label": "Title line 2 (bold)", "default": "real yuzu" },
+    { "type": "textarea", "id": "paragraph_1", "label": "Paragraph 1", "default": "Purple Flame is made with real yuzu juice — bright, fragrant citrus from Japan and Australia. No concentrates, no shortcuts." },
+    { "type": "textarea", "id": "paragraph_2", "label": "Paragraph 2", "default": "Just real fruit, pressed fresh, for a spritz that tastes alive in every glass." },
+    { "type": "image_picker", "id": "note_image", "label": "Note thumbnail" },
+    { "type": "textarea", "id": "note_text", "label": "Note text", "default": "Real yuzu juice, pressed fresh." }
+  ],
+  "presets": [{ "name": "Origin story" }]
+}
+{% endschema %}

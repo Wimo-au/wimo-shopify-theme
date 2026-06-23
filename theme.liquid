@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F2EDE3">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  {{ 'style.css' | asset_url | stylesheet_tag }}
+
+  <script>
+    try { if (localStorage.getItem('wimo_age_ok') === 'yes') document.documentElement.classList.add('age-ok'); } catch (e) {}
+  </script>
+
+  {{ content_for_header }}
+</head>
+<body class="tpl-{{ template.name | handle }}">
+
+  {% unless template.name == 'index' %}
+    {% section 'announcement' %}
+    {% section 'header' %}
+  {% endunless %}
+
+  <main id="main-content">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {% render 'age-gate' %}
+
+  <script src="{{ 'wimo.js' | asset_url }}" defer></script>
+
+</body>
+</html>

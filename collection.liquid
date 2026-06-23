@@ -1,0 +1,18 @@
+<div class="collection-head">
+  <div class="eyebrow page-hero__eyebrow">WIMO</div>
+  <h1 class="page-hero__title">{{ collection.title | default: 'Shop' }}</h1>
+</div>
+
+<div class="collection-grid">
+  {% for product in collection.products %}
+    <a class="pcard" href="{{ product.url }}">
+      <div class="pcard__img" style="background-image:url('{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 }}{% else %}{{ 'bottle-solo.png' | asset_url }}{% endif %}');"></div>
+      <div class="pcard__title">{{ product.title }}</div>
+      <div class="pcard__price">{{ product.price | money }}</div>
+    </a>
+  {% else %}
+    <p class="lede" style="grid-column:1/-1;text-align:center;">No products yet — add products to this collection in Shopify.</p>
+  {% endfor %}
+</div>
+
+{% paginate collection.products by 12 %}{% endpaginate %}

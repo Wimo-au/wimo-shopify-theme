@@ -1,0 +1,73 @@
+<footer class="site-footer" data-snap data-label="Shop">
+  <div class="site-footer__inner" data-reveal>
+
+    <div class="footer-brand">
+      <a href="{{ routes.root_url }}" class="wordmark">WIMO</a>
+      <div class="footer-brand__tag">{{ section.settings.tagline }}</div>
+    </div>
+
+    <div class="footer-cols">
+      {% for block in section.blocks %}
+        {% if block.type == 'menu' %}
+          <div class="footer-col" {{ block.shopify_attributes }}>
+            <div class="footer-col__h">{{ block.settings.heading }}</div>
+            {% if block.settings.link_1 != blank %}<a href="{{ block.settings.link_1 }}">{{ block.settings.label_1 }}</a>{% endif %}
+            {% if block.settings.link_2 != blank %}<a href="{{ block.settings.link_2 }}">{{ block.settings.label_2 }}</a>{% endif %}
+            {% if block.settings.link_3 != blank %}<a href="{{ block.settings.link_3 }}">{{ block.settings.label_3 }}</a>{% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="newsletter">
+      <div class="newsletter__h">{{ section.settings.newsletter_heading }}</div>
+      {% form 'customer', class: 'newsletter__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter__field">
+          <input type="email" name="contact[email]" placeholder="Email address" required>
+          <button type="submit" aria-label="Subscribe">&rarr;</button>
+        </div>
+      {% endform %}
+      <div class="newsletter__note">{{ section.settings.newsletter_note }}</div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+    <span>{{ section.settings.legal }}</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "your wine moment.\nVivid wine for the spontaneous." },
+    { "type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "Join the moment" },
+    { "type": "text", "id": "newsletter_note", "label": "Newsletter note", "default": "Tasting notes and new releases, now and then." },
+    { "type": "text", "id": "legal", "label": "Legal line", "default": "Please enjoy responsibly · 18+" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+        { "type": "text", "id": "label_1", "label": "Link 1 label", "default": "Purple Flame" },
+        { "type": "url", "id": "link_1", "label": "Link 1 URL" },
+        { "type": "text", "id": "label_2", "label": "Link 2 label", "default": "Gift sets" },
+        { "type": "url", "id": "link_2", "label": "Link 2 URL" },
+        { "type": "text", "id": "label_3", "label": "Link 3 label", "default": "Stockists" },
+        { "type": "url", "id": "link_3", "label": "Link 3 URL" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "menu", "settings": { "heading": "Shop", "label_1": "Purple Flame", "label_2": "Gift sets", "label_3": "Stockists" } },
+      { "type": "menu", "settings": { "heading": "WIMO", "label_1": "Our story", "link_1": "/pages/story", "label_2": "Partner with us", "link_2": "/pages/partner", "label_3": "Stockists" } }
+    ]
+  }
+}
+{% endschema %}

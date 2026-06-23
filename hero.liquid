@@ -1,0 +1,82 @@
+{%- assign hero_img = section.settings.image -%}
+{%- assign p = all_products[section.settings.featured_product] -%}
+{%- assign buy_url = p.url | default: routes.all_products_collection_url -%}
+{%- if p != blank %}{% assign buy_price = p.price | money %}{% else %}{% assign buy_price = section.settings.price %}{% endif -%}
+
+<section class="chero" data-snap data-label="{{ section.settings.dot_label }}">
+  <div class="chero__stage">
+    <div class="chero__bg" style="background-image:url('{% if hero_img %}{{ hero_img | image_url: width: 2400 }}{% else %}{{ 'hero-pier.png' | asset_url }}{% endif %}');"></div>
+    <div class="chero__scrim"></div>
+
+    {% unless section.settings.announcement == blank %}
+      <div class="chero__ann">{{ section.settings.announcement }}</div>
+    {% endunless %}
+
+    <div class="chero__nav">
+      <div class="chero__nav-inner">
+        <nav class="chero__nav-links">
+          <a href="{{ routes.all_products_collection_url }}">Shop</a>
+          <a href="/pages/story">Story</a>
+          <a href="/blogs/journal">Journal</a>
+        </nav>
+        <a href="{{ routes.root_url }}" class="chero__wordmark">WIMO</a>
+        <div class="chero__nav-right">
+          <a href="{{ routes.cart_url }}">Cart ({{ cart.item_count }})</a>
+          <a href="{{ buy_url }}" class="chero__buy">Buy · {{ buy_price }}</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEAT A — quiet establishing mark -->
+    <div class="chero__quiet">
+      <div class="m">WIMO</div>
+      <div class="s">your wine moment</div>
+    </div>
+
+    <!-- BEAT B — title emerges -->
+    <div class="chero__title">
+      <div class="ey">{{ section.settings.eyebrow }}</div>
+      <h1>{{ section.settings.title_line1 }}<br><strong>{{ section.settings.title_line2 }}</strong></h1>
+    </div>
+
+    <!-- BEAT C — tagline + actions -->
+    <div class="chero__detail">
+      <p>{{ section.settings.text }}</p>
+      <div class="chero__actions">
+        <a class="btn btn--plum" href="{{ buy_url }}">Buy now — {{ buy_price }}</a>
+        <a class="btn btn--outline" href="{{ buy_url }}">{{ section.settings.button_label }}</a>
+        <a class="btn btn--outline" href="/pages/partner">Partner with us</a>
+      </div>
+    </div>
+
+    <div class="chero__cue">
+      <span class="c-lbl">Scroll</span>
+      <span class="c-arrow">&darr;</span>
+    </div>
+  </div>
+</section>
+
+<!-- persistent quick-buy (fades in after the intro) -->
+<a class="wimo-quickbuy" href="{{ buy_url }}">
+  <span class="wimo-quickbuy__dot"></span>
+  Buy Purple Flame · {{ buy_price }}
+</a>
+
+{% schema %}
+{
+  "name": "Cinematic hero",
+  "settings": [
+    { "type": "product", "id": "featured_product", "label": "Featured product (links the Buy buttons & live price)" },
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "announcement", "label": "Announcement (overlay)", "default": "Complimentary shipping on orders over $120 · Poured across Australia" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Sparkling Yuzu · No.01" },
+    { "type": "text", "id": "title_line1", "label": "Title line 1", "default": "Your wine" },
+    { "type": "text", "id": "title_line2", "label": "Title line 2 (bold)", "default": "moment." },
+    { "type": "textarea", "id": "text", "label": "Tagline", "default": "Wine, but vivid — fun, alive, full of life. Never reserved for the occasion, always ready for the moment." },
+    { "type": "text", "id": "button_label", "label": "Secondary button label", "default": "Explore the spritz" },
+    { "type": "text", "id": "price", "label": "Fallback price (if no product)", "default": "$38" },
+    { "type": "text", "id": "dot_label", "label": "Page-dot label", "default": "Intro" }
+  ],
+  "presets": [{ "name": "Cinematic hero" }]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+<div class="collection-head">
+  <div class="eyebrow page-hero__eyebrow">WIMO</div>
+  <h1 class="page-hero__title">Search</h1>
+</div>
+
+<div class="simple-wrap">
+  <form action="{{ routes.search_url }}" method="get" class="search-form" role="search">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search">
+    <button type="submit" class="btn btn--plum">Search</button>
+  </form>
+
+  {% if search.performed %}
+    <div class="collection-grid" style="padding-top:60px;">
+      {% for item in search.results %}
+        <a class="pcard" href="{{ item.url }}">
+          <div class="pcard__img" style="background-image:url('{% if item.featured_image %}{{ item.featured_image | image_url: width: 700 }}{% elsif item.image %}{{ item.image | image_url: width: 700 }}{% else %}{{ 'glass-coast.png' | asset_url }}{% endif %}');"></div>
+          <div class="pcard__title">{{ item.title }}</div>
+          {% if item.price %}<div class="pcard__price">{{ item.price | money }}</div>{% endif %}
+        </a>
+      {% else %}
+        <p class="lede" style="grid-column:1/-1;text-align:center;">No results for &ldquo;{{ search.terms }}&rdquo;.</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

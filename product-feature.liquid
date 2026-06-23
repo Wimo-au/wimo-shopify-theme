@@ -1,0 +1,53 @@
+{%- assign p = all_products[section.settings.featured_product] -%}
+{%- assign feat_img = section.settings.image -%}
+<section class="feature" data-snap data-label="Purple Flame">
+  <div class="feature__text" data-reveal>
+    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+
+    {% if p != blank %}
+      <h2 class="h2">{{ p.title }}</h2>
+    {% else %}
+      <h2 class="h2">{{ section.settings.title_line1 }}<br><strong>{{ section.settings.title_line2 }}</strong></h2>
+    {% endif %}
+
+    <p class="lede">{{ section.settings.description }}</p>
+
+    {% assign chips = section.settings.chips | split: ',' %}
+    {% if chips.size > 0 %}
+      <div class="chips">
+        {% for chip in chips %}<span class="chip">{{ chip | strip }}</span>{% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="feature__buy">
+      <div class="price">
+        {% if p != blank %}{{ p.price | money }}{% else %}{{ section.settings.price }}{% endif %}
+      </div>
+      <a class="btn btn--plum" href="{% if p != blank %}{{ p.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">{{ section.settings.button_label }}</a>
+      <span class="meta">{{ section.settings.meta }}</span>
+    </div>
+  </div>
+
+  <div class="feature__img" style="background-image:url('{% if feat_img %}{{ feat_img | image_url: width: 1800 }}{% elsif p != blank and p.featured_image %}{{ p.featured_image | image_url: width: 1800 }}{% else %}{{ 'pour-wide.png' | asset_url }}{% endif %}');">
+    <div class="feature__img-fade"></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product feature",
+  "settings": [
+    { "type": "product", "id": "featured_product", "label": "Featured product (optional — pulls live title & price)" },
+    { "type": "image_picker", "id": "image", "label": "Image (optional — defaults to product or theme image)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "No.01 — Out now" },
+    { "type": "text", "id": "title_line1", "label": "Title line 1", "default": "Purple Flame" },
+    { "type": "text", "id": "title_line2", "label": "Title line 2 (bold)", "default": "Yuzu Spritz" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "A vivid magenta sparkling spritz — bright real yuzu over fine, weightless bubbles. Citrus blossom, a coastal lift, a clean dry finish." },
+    { "type": "text", "id": "chips", "label": "Tasting chips (comma separated)", "default": "Yuzu, Citrus blossom, Fine bubbles" },
+    { "type": "text", "id": "price", "label": "Fallback price", "default": "$38" },
+    { "type": "text", "id": "meta", "label": "Meta", "default": "750ml · 11% ABV" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to cart" }
+  ],
+  "presets": [{ "name": "Product feature" }]
+}
+{% endschema %}

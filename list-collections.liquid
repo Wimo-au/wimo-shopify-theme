@@ -1,0 +1,13 @@
+<div class="collection-head">
+  <div class="eyebrow page-hero__eyebrow">WIMO</div>
+  <h1 class="page-hero__title">Collections</h1>
+</div>
+
+<div class="collection-grid">
+  {% for collection in collections %}
+    <a class="pcard" href="{{ collection.url }}">
+      <div class="pcard__img" style="background-image:url('{% if collection.featured_image %}{{ collection.featured_image | image_url: width: 700 }}{% else %}{{ 'trio-wide.png' | asset_url }}{% endif %}');"></div>
+      <div class="pcard__title">{{ collection.title }}</div>
+    </a>
+  {% endfor %}
+</div>

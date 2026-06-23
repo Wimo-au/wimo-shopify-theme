@@ -1,0 +1,13 @@
+{% comment %} Shared navigation row — used by the hero overlay and the solid header {% endcomment %}
+<div class="site-nav">
+  <nav class="site-nav__links">
+    <a href="{{ routes.all_products_collection_url }}">Shop</a>
+    <a href="/pages/story">Story</a>
+    <a href="/blogs/journal">Journal</a>
+  </nav>
+  <a href="{{ routes.root_url }}" class="wordmark">WIMO</a>
+  <div class="site-nav__links site-nav__links--right">
+    <a href="{{ routes.search_url }}">Search</a>
+    <a href="{{ routes.cart_url }}">Cart ({{ cart.item_count }})</a>
+  </div>
+</div>

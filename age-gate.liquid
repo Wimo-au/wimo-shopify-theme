@@ -1,0 +1,57 @@
+{% comment %} 18+ age verification gate {% endcomment %}
+<div class="age-gate" id="age-gate" aria-hidden="false">
+  <div class="age-gate__bg" style="background-image:url('{{ 'hero-pier.png' | asset_url }}');"></div>
+  <div class="age-gate__scrim"></div>
+  <div class="age-gate__card">
+    <span class="wordmark" style="font-size:30px;">WIMO</span>
+    <div class="age-gate__eyebrow">your wine moment</div>
+    <div class="age-gate__rule"></div>
+
+    <div class="age-gate__step age-gate__step--ask" data-step="ask">
+      <h2 class="age-gate__q">Are you 18 or older?</h2>
+      <p class="age-gate__p">You must be of legal drinking age to enter. Please confirm before you explore.</p>
+      <div class="age-gate__actions">
+        <button type="button" class="btn btn--light" data-age-yes>Yes, I am 18+</button>
+        <button type="button" class="btn btn--outline" data-age-no>I&rsquo;m not yet</button>
+      </div>
+      <div class="age-gate__fine">Please enjoy responsibly.</div>
+    </div>
+
+    <div class="age-gate__step age-gate__step--declined" data-step="declined">
+      <h2 class="age-gate__q">Come back soon.</h2>
+      <p class="age-gate__p">You need to be 18 or older to explore WIMO. We&rsquo;ll be here when the moment is right.</p>
+      <div class="age-gate__actions">
+        <button type="button" class="btn btn--outline" data-age-back>Go back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var KEY = 'wimo_age_ok';
+    var gate = document.getElementById('age-gate');
+    if (!gate) return;
+    var confirmed = false;
+    try { confirmed = localStorage.getItem(KEY) === 'yes'; } catch (e) {}
+    if (confirmed) { gate.classList.add('is-hidden'); return; }
+
+    document.body.classList.add('age-locked');
+    var ask = gate.querySelector('[data-step="ask"]');
+    var declined = gate.querySelector('[data-step="declined"]');
+
+    gate.querySelector('[data-age-yes]').addEventListener('click', function () {
+      try { localStorage.setItem(KEY, 'yes'); } catch (e) {}
+      gate.classList.add('is-hidden');
+      document.body.classList.remove('age-locked');
+    });
+    gate.querySelector('[data-age-no]').addEventListener('click', function () {
+      ask.style.display = 'none';
+      declined.style.display = 'block';
+    });
+    gate.querySelector('[data-age-back]').addEventListener('click', function () {
+      declined.style.display = 'none';
+      ask.style.display = 'block';
+    });
+  })();
+</script>

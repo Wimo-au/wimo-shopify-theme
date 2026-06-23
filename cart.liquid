@@ -1,0 +1,33 @@
+<div class="collection-head">
+  <div class="eyebrow page-hero__eyebrow">WIMO</div>
+  <h1 class="page-hero__title">Your cart</h1>
+</div>
+
+<div class="simple-wrap">
+  {% if cart.item_count == 0 %}
+    <p class="lede" style="text-align:center;margin:0 auto;">Your cart is empty.</p>
+    <div style="text-align:center;margin-top:32px;">
+      <a class="btn btn--plum" href="{{ routes.all_products_collection_url }}">Shop Purple Flame</a>
+    </div>
+  {% else %}
+    {% form 'cart', cart %}
+      {% for item in cart.items %}
+        <div class="cart-row">
+          <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}">
+          <div class="cart-row__info">
+            <a href="{{ item.url }}">{{ item.product.title }}</a>
+            <div class="meta">{{ item.price | money }}</div>
+          </div>
+          <input class="qty" type="number" min="0" name="updates[]" value="{{ item.quantity }}">
+          <div class="cart-row__info" style="text-align:right;flex:0 0 auto;">{{ item.final_line_price | money }}</div>
+        </div>
+      {% endfor %}
+      <div class="cart-foot">
+        <button type="submit" name="update" class="btn btn--outline" style="border-color:rgba(34,29,26,.4);color:var(--ink);">Update</button>
+        <div class="cart-foot__total">Subtotal — {{ cart.total_price | money }}</div>
+        <button type="submit" name="checkout" class="btn btn--plum">Checkout</button>
+      </div>
+      <p class="meta" style="margin-top:18px;">Taxes and shipping calculated at checkout.</p>
+    {% endform %}
+  {% endif %}
+</div>

@@ -1,0 +1,14 @@
+{
+  "current": {
+    "color_accent": "#7A2E55",
+    "color_paper": "#F2EDE3",
+    "color_ink": "#221D1A"
+  },
+  "presets": {
+    "WIMO": {
+      "color_accent": "#7A2E55",
+      "color_paper": "#F2EDE3",
+      "color_ink": "#221D1A"
+    }
+  }
+}

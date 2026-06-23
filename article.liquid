@@ -1,0 +1,11 @@
+<div class="page-hero">
+  <div class="eyebrow page-hero__eyebrow">WIMO · Journal</div>
+  <h1 class="page-hero__title">{{ article.title }}</h1>
+  <div class="meta" style="margin-top:18px;">{{ article.published_at | date: '%B %-d, %Y' }}</div>
+</div>
+<div class="page-body">
+  {% if article.image %}
+    <img src="{{ article.image | image_url: width: 1400 }}" alt="{{ article.title | escape }}" style="width:100%;margin-bottom:40px;">
+  {% endif %}
+  <div class="rte">{{ article.content }}</div>
+</div>
