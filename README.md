@@ -1,0 +1,1 @@
+# wimo-shopify-theme
